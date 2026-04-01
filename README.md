@@ -12,6 +12,8 @@
   </div>
 </h1>
 
+> **Active Fork** — This is an active fork of the upstream [comet-ml/opik-openclaw](https://github.com/comet-ml/opik-openclaw) with improvements pending upstream PR. The upstream is tracked as `upstream` remote.
+
 <p align="center">
   Official plugin for <a href="https://github.com/openclaw/openclaw">OpenClaw</a> that exports agent traces to <br/>
   <a href="https://www.comet.com/docs/opik/">Opik</a> for observability and monitoring.
