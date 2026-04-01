@@ -176,6 +176,34 @@ The SDK exports are:
 import { onDiagnosticEvent, isDiagnosticsEnabled } from "openclaw/plugin-sdk";
 ```
 
+## API Stability Notes
+
+### `onDiagnosticEvent` — Stability Assessment
+
+**Verdict: API de facto estável, documentação oficial pendente.**
+
+#### Evidências
+
+| Critério | Status | Detalhe |
+|---|---|---|
+| Exportado no SDK index | ✅ Sim | `openclaw/plugin-sdk/index.js` re-exporta `onDiagnosticEvent` |
+| Tipado em `.d.ts` | ✅ Sim | `export function onDiagnosticEvent(listener: ...)` |
+| Usado internamente pelo OpenClaw | ✅ Sim | `diagnostics-otel` extension o usa em `index.js:51662` |
+| `model.usage` documentado | ✅ Sim | `logging.md` → "Diagnostic event catalog" lista `model.usage` |
+| `onDiagnosticEvent` no SDK docs público | ⚠️ Não | Não aparece em `sdk-overview.md` nem `sdk-runtime.md` |
+
+#### Análise
+
+`onDiagnosticEvent` é uma API **exportada do SDK oficial** (`openclaw/plugin-sdk`), usada em produção pelo plugin `diagnostics-otel` do próprio OpenClaw. O tipo `model.usage` é documentado no `logging.md`. Esses são sinais fortes de estabilidade.
+
+A única lacuna é que `onDiagnosticEvent` **não aparece explicitamente nos documentos de referência do plugin SDK** (`sdk-overview.md`, `sdk-runtime.md`). Isso não indica instabilidade — indica que a documentação está incompleta, não que a API seja interna.
+
+#### Decisão: **Opção B**
+
+O plugin continua usando `onDiagnosticEvent`. Recomendamos que o upstream OpenClaw documente `onDiagnosticEvent` formalmente na seção de API pública do plugin SDK.
+
+**Ação recomendada:** Abrir issue no repositório OpenClaw pedindo documentação oficial.
+
 ## Known limitation
 
 No OpenClaw core changes are included in this repository and relies on native hooks within the OpenClaw ecosystem.
