@@ -162,6 +162,20 @@ image refs in persisted tool transcript messages via `tool_result_persist`.
 | `subagent_ended` | subagent span update/end | finalizes subagent span with outcome/error |
 | `agent_end` | trace finalize | closes pending spans and trace |
 
+### Diagnostic events
+
+The plugin also uses `onDiagnosticEvent()` from `openclaw/plugin-sdk` to capture `model.usage`
+and cost metadata. This API is exported from the official OpenClaw SDK and is stable, but
+not yet documented in the public plugin docs. The event types are fully typed in the SDK:
+
+- `DiagnosticUsageEvent` — contains `model.usage` (input/output tokens, cost)
+- Plus other diagnostic events for webhook, session, and lane monitoring
+
+The SDK exports are:
+```typescript
+import { onDiagnosticEvent, isDiagnosticsEnabled } from "openclaw/plugin-sdk";
+```
+
 ## Known limitation
 
 No OpenClaw core changes are included in this repository and relies on native hooks within the OpenClaw ecosystem.
